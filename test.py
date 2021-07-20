@@ -29,6 +29,7 @@ class GpsTest(App):
     gps_location = StringProperty()
     gps_status = StringProperty('Click Start to get GPS location updates')
 
+
     def request_android_permissions(self):
         """
         Since API 23, Android requires permission to be requested at runtime.
@@ -73,24 +74,24 @@ class GpsTest(App):
 
     def start(self, minTime, minDistance):
         gps.start(minTime, minDistance)
-        import firebase_admin
-        from firebase_admin import db
-        from datetime import datetime
-        now = datetime.now()
-        current_time = now.strftime("%H:%M")
-        print(current_time)
-        cred_obj = firebase_admin.credentials.Certificate('firebase-adminsdk.json')
-        default_app = firebase_admin.initialize_app(cred_obj, {
-            'databaseURL': 'https://tht2021-b8b77-default-rtdb.asia-southeast1.firebasedatabase.app/'
-        })
-        href = "/toanhacicarus/11h" + str(current_time)
+        while True:
+            import firebase_admin
+            from firebase_admin import db
+            from datetime import datetime
+            import time
+            now = datetime.now()
+            current_time = now.strftime("%H:%M")
+            print(current_time)
+            cred_obj = firebase_admin.credentials.Certificate('firebase-adminsdk.json')
+            default_app = firebase_admin.initialize_app(cred_obj, {
+                'databaseURL': 'https://tht2021-b8b77-default-rtdb.asia-southeast1.firebasedatabase.app/'
+            })
+            href = "/test/" + str(current_time)
 
-        ref = db.reference()
-        json = {'time': '11',
-                'lat': on_location,
-                'lon': 70.02
-                }
-        ref.set(json)
+            ref = db.reference()
+            json = {'location': self.gps_location}
+            ref.set(json)
+            time.sleep(1800)
     def stop(self):
         gps.stop()
 
