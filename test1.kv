@@ -1,0 +1,24 @@
+MDBoxLayout:
+    MDTextField:
+        id: test
+        hint_text: "Name"
+        helper_text:"forget"
+        pos_hint : {'center_x':0.5 ,'center_y':0.5}
+        size_hint_x : None
+        width: 300
+    MDRectangleFlatButton:
+        text: "Submit"
+        pos_hint : {'center_x':0.5 ,'center_y':0.5}
+        text_color: 0, 0, 1, 1
+        md_bg_color: 1, 1, 0, 1
+        on_release:
+            print("success")
+            app.submit()
+    MDRectangleFlatButton:
+        text: "show"
+        pos_hint : {'center_x':0.5 ,'center_y':0.3}
+        text_color: 0, 0, 1, 1
+        md_bg_color: 1, 1, 0, 1
+        on_release:
+            print("success")
+            app.show()
